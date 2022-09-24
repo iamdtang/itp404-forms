@@ -1,5 +1,9 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { useState } from "react";
+import Checkbox from "./Checkbox";
+import RadioButtons from "./RadioButtons";
+import Select from "./Select";
+import Textarea from "./Textarea";
 import TextInput from "./TextInput";
 
 function App() {
@@ -47,88 +51,53 @@ function App() {
           />
         </div>
         <div className="mb-3">
-          <label className="form-label">Country</label>
-          <select
-            className="form-select form-select-lg"
+          <Select
+            label="Country"
             value={country}
-            onChange={(event) => {
-              setCountry(event.target.value);
+            options={[
+              { value: "", label: "--Select a Country--" },
+              { value: "usa", label: "United States" },
+              { value: "canada", label: "Canada" },
+              { value: "mexico", label: "Mexico" },
+            ]}
+            onChange={(updatedCountry) => {
+              setCountry(updatedCountry);
             }}
-          >
-            <option value="">--Select a country--</option>
-            <option value="usa">United States</option>
-            <option value="canada">Canada</option>
-            <option value="mexico">Mexico</option>
-          </select>
+          />
         </div>
         <div className="mb-3">
-          <label htmlFor="message" className="form-label">
-            Message
-          </label>
-          <textarea
-            className="form-control"
+          <Textarea
+            label="Message"
             id="message"
-            rows="3"
             value={message}
-            onChange={(event) => {
-              setMessage(event.target.value);
+            onChange={(updatedMessage) => {
+              setMessage(updatedMessage);
             }}
           />
         </div>
         <div className="mb-3">
           <p>When is the best time to contact you?</p>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="contact-time-preference"
-              id="morning-contact-time-preference"
-              value="morning"
-              onChange={(event) => {
-                setContactTimePreference(event.target.value);
-              }}
-              checked={contactTimePreference === "morning"}
-            />
-            <label
-              className="form-check-label"
-              htmlFor="morning-contact-time-preference"
-            >
-              Morning
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="contact-time-preference"
-              id="afternoon-contact-time-preference"
-              value="afternoon"
-              onChange={(event) => {
-                setContactTimePreference(event.target.value);
-              }}
-              checked={contactTimePreference === "afternoon"}
-            />
-            <label
-              className="form-check-label"
-              htmlFor="afternoon-contact-time-preference"
-            >
-              Afternoon
-            </label>
-          </div>
-        </div>
-        <div className="form-check mb-3">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="newsletter"
-            checked={isOptedInToNewsletter}
-            onChange={(event) => {
-              setIsOptedInToNewsletter(event.target.checked);
+          <RadioButtons
+            name="contact-time-preference"
+            options={[
+              { value: "morning", label: "Morning" },
+              { value: "afternoon", label: "Afternoon" },
+            ]}
+            value={contactTimePreference}
+            onChange={(updatedContactTimePreference) => {
+              setContactTimePreference(updatedContactTimePreference);
             }}
           />
-          <label className="form-check-label" htmlFor="newsletter">
-            Check if you'd like to opt-in to our newsletter
-          </label>
+        </div>
+        <div className="mb-3">
+          <Checkbox
+            id="newsletter"
+            label="Check if you'd like to opt-in to our newsletter"
+            checked={isOptedInToNewsletter}
+            onChange={(updatedIsOptedInToNewsletter) => {
+              setIsOptedInToNewsletter(updatedIsOptedInToNewsletter);
+            }}
+          />
         </div>
         <button type="submit" className="btn btn-primary">
           Submit
