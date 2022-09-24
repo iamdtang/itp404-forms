@@ -1,8 +1,4 @@
-import { useState } from "react";
-
 export default function TextInput(props) {
-  const [value, setValue] = useState("");
-
   return (
     <>
       <label htmlFor={props.id} className="form-label">
@@ -12,9 +8,9 @@ export default function TextInput(props) {
         type="text"
         className="form-control"
         id={props.id}
-        value={value}
+        value={props.value}
         onChange={(event) => {
-          setValue(event.target.value);
+          props.onChange(event.target.value);
         }}
       />
     </>
