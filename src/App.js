@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { useState } from "react";
+import TextInput from "./TextInput";
 
 function App() {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -24,19 +25,10 @@ function App() {
     <div className="container">
       <form onSubmit={handleSubmit}>
         <div className="my-3">
-          <label htmlFor="phone" className="form-label">
-            Phone
-          </label>
-
-          <input
-            type="text"
-            className="form-control"
-            id="phone"
-            value={phoneNumber}
-            onChange={(event) => {
-              setPhoneNumber(event.target.value);
-            }}
-          />
+          <TextInput id="name" label="Name" />
+        </div>
+        <div className="my-3">
+          <TextInput id="phone" label="Phone" />
         </div>
         <div className="mb-3">
           <label className="form-label">Country</label>
